@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --accent: #34d399;
+  --accent-strong: #10b981;
+  --panel: rgba(15, 23, 42, 0.82);
+  --panel-border: rgba(148, 163, 184, 0.18);
+  --page-bg: #020617;
+  --page-bg-2: #111827;
+  --page-bg-3: #0f172a;
+  --text-primary: #f8fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #cbd5e1;
+  --shadow-color: rgba(15, 23, 42, 0.35);
+  --grid-opacity: 0.16;
+  --input-bg: rgba(2, 6, 23, 0.8);
+}
+
+body[data-theme="light"] {
+  color-scheme: light;
+  --panel: rgba(255, 255, 255, 0.92);
+  --panel-border: rgba(15, 23, 42, 0.08);
+  --page-bg: #f8fafc;
+  --page-bg-2: #e2e8f0;
+  --page-bg-3: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #475569;
+  --shadow-color: rgba(15, 23, 42, 0.12);
+  --grid-opacity: 0.06;
+  --input-bg: rgba(255, 255, 255, 0.95);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(52, 211, 153, 0.18), transparent 22%),
+    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.14), transparent 18%),
+    linear-gradient(135deg, var(--page-bg), var(--page-bg-2) 48%, var(--page-bg-3));
+  color: var(--text-primary);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: var(--grid-opacity);
+}
+
+img {
+  display: block;
+}
+
+::selection {
+  background: rgba(52, 211, 153, 0.35);
+  color: var(--text-primary);
+}
+
+.glass-panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 24px 80px var(--shadow-color);
+  backdrop-filter: blur(18px);
+}
+
+body[data-theme="light"] .text-white,
+body[data-theme="light"] .text-slate-50,
+body[data-theme="light"] .text-slate-100 {
+  color: var(--text-primary) !important;
+}
+
+body[data-theme="light"] .text-slate-200,
+body[data-theme="light"] .text-slate-200\/80 {
+  color: var(--text-secondary) !important;
+}
+
+body[data-theme="light"] .text-slate-300 {
+  color: var(--text-muted) !important;
+}
+
+body[data-theme="light"] .text-emerald-100,
+body[data-theme="light"] .text-emerald-200 {
+  color: #065f46 !important;
+}
+
+body[data-theme="light"] .bg-white\/5 {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+}
+
+body[data-theme="light"] .bg-slate-950\/65,
+body[data-theme="light"] .bg-slate-950\/70 {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+}
+
+body[data-theme="light"] .bg-slate-950\/80 {
+  background-color: var(--input-bg) !important;
+}
+
+body[data-theme="light"] .border-white\/10 {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+body[data-theme="light"] .placeholder\:text-slate-500::placeholder {
+  color: var(--text-muted) !important;
+}
