@@ -130,10 +130,10 @@ styles/
 
 ---
 
-## Team Members
+## Team Members 
 
-- Student 1 — Frontend, Homepage, Destinations
-- Student 2 — Detail Pages, Chatbot, Deployment
+- Student 1 — Frontend, Homepage, Chatbot, Deployment
+- Student 2 — Detail Pages, Destinations
 
 ---
 
