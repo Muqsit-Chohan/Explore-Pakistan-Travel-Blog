@@ -78,21 +78,21 @@ export default function ChatWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
-            className="fixed bottom-24 right-6 z-50 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/95 shadow-[0_30px_80px_rgba(15,23,42,0.5)] backdrop-blur"
+            className="fixed bottom-24 right-6 z-50 w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white/95 shadow-[0_30px_80px_rgba(15,23,42,0.12)] backdrop-blur"
           >
             <div className="flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-400 px-4 py-3">
               <span className="h-2.5 w-2.5 rounded-full bg-white" />
               <span className="text-sm font-semibold text-slate-950">Pakistan Travel Guide</span>
             </div>
 
-            <div className="max-h-72 space-y-3 overflow-y-auto p-4">
+            <div className="max-h-72 space-y-3 overflow-y-auto bg-white p-4">
               {messages.map((message, index) => (
                 <div key={`${message.role}-${index}`} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
                     className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm leading-6 ${
                       message.role === "user"
                         ? "bg-emerald-500 text-white"
-                        : "bg-slate-800 text-slate-100"
+                        : "bg-slate-100 text-slate-800"
                     }`}
                   >
                     {message.content}
@@ -102,17 +102,17 @@ export default function ChatWidget() {
 
               {loading && (
                 <div className="flex justify-start">
-                  <div className="flex gap-1 rounded-2xl rounded-bl-sm bg-slate-800 px-4 py-3">
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-300" style={{ animationDelay: "0ms" }} />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-300" style={{ animationDelay: "150ms" }} />
-                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-300" style={{ animationDelay: "300ms" }} />
+                  <div className="flex gap-1 rounded-2xl rounded-bl-sm bg-slate-100 px-4 py-3">
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "0ms" }} />
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "150ms" }} />
+                    <span className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "300ms" }} />
                   </div>
                 </div>
               )}
               <div ref={bottomRef} />
             </div>
 
-            <div className="border-t border-white/10 p-3">
+            <div className="border-t border-slate-200 bg-white p-3">
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -120,7 +120,7 @@ export default function ChatWidget() {
                   onChange={(event) => setInput(event.target.value)}
                   onKeyDown={(event) => event.key === "Enter" && sendMessage()}
                   placeholder="Ask about Pakistan..."
-                  className="w-full rounded-xl border border-white/10 bg-slate-900 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400 focus:outline-none"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:border-emerald-400 focus:outline-none"
                 />
                 <button
                   type="button"
