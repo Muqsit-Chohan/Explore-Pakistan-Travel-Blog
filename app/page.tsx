@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { ArrowRight, Compass, MountainSnow, ShieldCheck, Sparkles, Star, Users } from "lucide-react";
 import { destinations } from "@/lib/data";
 
@@ -29,7 +30,54 @@ const highlights = [
   },
 ];
 
+const featuredCities = [
+  {
+    title: "Hunza Valley",
+    region: "Gilgit-Baltistan",
+    image:
+      "https://images.unsplash.com/photo-1514558427911-8e293bebf18c?w=1200&auto=format&fit=crop&q=80&ixlib=rb-4.1.0",
+    description:
+      "Alpine serenity, apricot orchards, and unforgettable mountain views await in the Karakoram foothills.",
+  },
+  {
+    title: "Lahore",
+    region: "Punjab",
+    image:
+      "https://images.unsplash.com/photo-1603491656337-3b491147917c?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0",
+    description:
+      "Step into Mughal grandeur, bustling bazaars, and a food scene that turns every street into a feast.",
+  },
+  {
+    title: "Skardu",
+    region: "Gilgit-Baltistan",
+    image:
+      "https://images.unsplash.com/photo-1602147557719-1d65f9e58a24?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0",
+    description:
+      "Gateway to K2, glacier lakes, and dramatic valleys that make every moment feel cinematic.",
+  },
+  {
+    title: "Karachi",
+    region: "Sindh",
+    image:
+      "https://plus.unsplash.com/premium_photo-1697729902269-70f031f22531?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0",
+    description:
+      "Discover sea breezes, vibrant neighborhoods, and a modern rhythm that keeps the city alive day and night.",
+  },
+];
+
 export default function HomePage() {
+  const [activeCityIndex, setActiveCityIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveCityIndex((current) => (current + 1) % featuredCities.length);
+    }, 3000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const currentCity = featuredCities[activeCityIndex];
+
   return (
     <>
       <section className="relative overflow-hidden">
@@ -87,19 +135,61 @@ export default function HomePage() {
               transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
               className="glass-panel rounded-[2rem] p-3"
             >
-              <div className="relative overflow-hidden rounded-[1.5rem]">
-                <img
-                  src="https://images.unsplash.com/photo-1612128952123-88ed13410495?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Pakistan landscape"
-                  className="h-[420px] w-full object-cover"
-                />
+              <div className="relative h-[420px] overflow-hidden rounded-[1.5rem]">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentCity.image}
+                    src={currentCity.image}
+                    alt={currentCity.title}
+                    className="h-full w-full object-cover"
+                    initial={{ opacity: 0, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.03 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                  />
+                </AnimatePresence>
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/10 to-transparent" />
-                <div className="absolute bottom-5 left-5 right-5">
-                  <p className="text-sm text-emerald-200">Most loved journey</p>
-                  <h2 className="mt-2 text-2xl font-bold text-white">Hunza Valley</h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-100/90">
-                    Alpine serenity, apricot orchards, and unforgettable mountain views await.
-                  </p>
+                <div className="absolute bottom-5 left-5 right-5 rounded-[1.25rem] bg-slate-950/45 p-4 backdrop-blur-sm">
+                  <motion.p
+                    key={`${currentCity.title}-label`}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.45, ease: "easeOut" }}
+                    className="text-sm !text-emerald-200"
+                  >
+                    Most loved journey
+                  </motion.p>
+                  <motion.h2
+                    key={`${currentCity.title}-heading`}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.45, ease: "easeOut", delay: 0.05 }}
+                    className="mt-2 text-2xl font-bold !text-white"
+                  >
+                    {currentCity.title}
+                  </motion.h2>
+                  <motion.p
+                    key={`${currentCity.title}-description`}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.45, ease: "easeOut", delay: 0.1 }}
+                    className="mt-2 text-sm leading-6 !text-slate-100"
+                  >
+                    {currentCity.description}
+                  </motion.p>
+                </div>
+                <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+                  {featuredCities.map((city, index) => (
+                    <span
+                      key={city.title}
+                      className={`h-2.5 rounded-full transition-all ${
+                        index === activeCityIndex ? "w-8 bg-emerald-300" : "w-2.5 bg-white/60"
+                      }`}
+                    />
+                  ))}
                 </div>
               </div>
             </motion.div>
