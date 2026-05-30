@@ -112,8 +112,8 @@ GEMINI_API_KEY
 
 ## Live Demo
 
-- Website: https://your-project.vercel.app
-- GitHub Repository: https://github.com/yourusername/explore-pakistan
+- Website: https://explore-pakistan-travel-blog.vercel.app/
+- GitHub Repository: https://github.com/Muqsit-Chohan/Explore-Pakistan-Travel-Blog
 - Demo Video: https://drive.google.com/file/d/1Uz3D1XeiOqIf49-lCAOcylJBJh74rIAG/view?usp=sharing
 
 ---
